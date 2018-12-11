@@ -11,6 +11,7 @@ Goat.allGoats = [];
 function Goat(filepath, description) {
   this.url = filepath;
   this.altText = description;
+  // this next push line is some kind of bullshit
   Goat.allGoats.push(this);
 }
 

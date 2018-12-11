@@ -5,23 +5,39 @@ console.log(allProductIdNames);
 // I'll connect this to the DOM:
 ProductVoter.imgElement = document.getElementById('qualityProduct');
 
-// I want to generate the file paths:
-// var allProductFilePaths =[];
-// for (var n = 0; n < allProductIdNames.length; n++) {
-//   allProductFilePaths[n] = allProductIdNames[n] +'.jpg';
-// }
-// console.log(allProductFilePaths[4]);
 
-function ProductVoter(idName, filepath, caption, numberClicked, numberShown) {
+
+function ProductVoter(idName, filepath, numberClicked, numberShown) {
   this.idName = idName;
   this.filepath = filepath;
-  this.caption = caption;
   // numberClicked and numberShown will need to be vars assigned to functions, or maybe prototypes
   this.numberClicked = numberClicked;
   this.numberShown = numberShown;
-  ProductVoter.allProducts.push(this);
+  allProducts.push(this);
+  console.log(this);
 } //end constructor
-new ProductVoter('bag', '\img\bag.jpg', 'Bag', 0, 0);
+new ProductVoter('img/bag.jpg', 'bag', 0, 0);
+new ProductVoter('img/banana.jpg','banana', 0, 0);
+new ProductVoter('img/bathroom.jpg','bathroom', 0, 0);
+new ProductVoter('img/boots.jpg','boots', 0, 0);
+new ProductVoter('img/breakfast.jpg','breakfast', 0, 0);
+new ProductVoter('img/bubblegum.jpg','bubblegum', 0, 0);
+new ProductVoter('img/chair.jpg','chair', 0, 0);
+new ProductVoter('img/cthulhu.jpg','cthulhu', 0, 0);
+new ProductVoter('img/dog-duck.jpg','dog-duck', 0, 0);
+new ProductVoter('img/dragon.jpg','dragon', 0, 0);
+new ProductVoter('img/pen.jpg','pen', 0, 0);
+new ProductVoter('img/pet-sweep.jpg','pet-sweep', 0, 0);
+new ProductVoter('img/scissors.jpg','scissors', 0, 0);
+new ProductVoter('img/shark.jpg','shark', 0, 0);
+new ProductVoter('img/sweep.jpg','sweep', 0, 0);
+new ProductVoter('img/tauntaun.jpg','tauntaun', 0, 0);
+new ProductVoter('img/unicorn.jpg','unicorn', 0, 0);
+new ProductVoter('img/usb.gif','usb', 0, 0);
+new ProductVoter('img/water-can.jpg','water-can', 0, 0);
+new ProductVoter('img/wine-glass.jpg','wine-glass', 0, 0);
+
+console.log(allProducts);
 
 //randomly generate a number to use as an index value
 ProductVoter.ranNum = function() {
@@ -50,10 +66,14 @@ ProductVoter.renderProductvoter = function() {
 
 
 // then I want to render 3 selected random images with buttons
-ProductVoter.renderProductvoter();
-
+function render1() {
+  var picker = 0;
+  var staple = document.getElementById('qualityProduct1');
+  staple.src = allProducts[picker].idName;
+}
+render1();
 // listen to the image element and add event listener, maybe I need to add three, one for each button?
-ProductVoter.imgElement.addEventListener('click', ProductVoter.randomProduct);
+// ProductVoter.imgElement.addEventListener('click', ProductVoter.randomProduct);
 //idName, filepath, caption, numberClicked, numberShown
 
 
