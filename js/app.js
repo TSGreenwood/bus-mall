@@ -18,33 +18,33 @@ function ProductVoter(idName, filepath, numberClicked, numberShown) {
 } //end constructor
 new ProductVoter('img/bag.jpg', 'bag', 0, 0);
 new ProductVoter('img/banana.jpg','banana', 0, 0);
-new ProductVoter('img/bathroom.jpg','bathroom', 0, 0);
-new ProductVoter('img/boots.jpg','boots', 0, 0);
-new ProductVoter('img/breakfast.jpg','breakfast', 0, 0);
-new ProductVoter('img/bubblegum.jpg','bubblegum', 0, 0);
-new ProductVoter('img/chair.jpg','chair', 0, 0);
-new ProductVoter('img/cthulhu.jpg','cthulhu', 0, 0);
-new ProductVoter('img/dog-duck.jpg','dog-duck', 0, 0);
-new ProductVoter('img/dragon.jpg','dragon', 0, 0);
-new ProductVoter('img/pen.jpg','pen', 0, 0);
-new ProductVoter('img/pet-sweep.jpg','pet-sweep', 0, 0);
-new ProductVoter('img/scissors.jpg','scissors', 0, 0);
-new ProductVoter('img/shark.jpg','shark', 0, 0);
-new ProductVoter('img/sweep.jpg','sweep', 0, 0);
-new ProductVoter('img/tauntaun.jpg','tauntaun', 0, 0);
-new ProductVoter('img/unicorn.jpg','unicorn', 0, 0);
-new ProductVoter('img/usb.gif','usb', 0, 0);
-new ProductVoter('img/water-can.jpg','water-can', 0, 0);
-new ProductVoter('img/wine-glass.jpg','wine-glass', 0, 0);
+// new ProductVoter('img/bathroom.jpg','bathroom', 0, 0);
+// new ProductVoter('img/boots.jpg','boots', 0, 0);
+// new ProductVoter('img/breakfast.jpg','breakfast', 0, 0);
+// new ProductVoter('img/bubblegum.jpg','bubblegum', 0, 0);
+// new ProductVoter('img/chair.jpg','chair', 0, 0);
+// new ProductVoter('img/cthulhu.jpg','cthulhu', 0, 0);
+// new ProductVoter('img/dog-duck.jpg','dog-duck', 0, 0);
+// new ProductVoter('img/dragon.jpg','dragon', 0, 0);
+// new ProductVoter('img/pen.jpg','pen', 0, 0);
+// new ProductVoter('img/pet-sweep.jpg','pet-sweep', 0, 0);
+// new ProductVoter('img/scissors.jpg','scissors', 0, 0);
+// new ProductVoter('img/shark.jpg','shark', 0, 0);
+// new ProductVoter('img/sweep.jpg','sweep', 0, 0);
+// new ProductVoter('img/tauntaun.jpg','tauntaun', 0, 0);
+// new ProductVoter('img/unicorn.jpg','unicorn', 0, 0);
+// new ProductVoter('img/usb.gif','usb', 0, 0);
+// new ProductVoter('img/water-can.jpg','water-can', 0, 0);
+// new ProductVoter('img/wine-glass.jpg','wine-glass', 0, 0);
 
 console.log(allProducts);
 
 //randomly generate a number to use as an index value
-ProductVoter.ranNum = function() {
+function ranNum() {
   var random = Math.random() * allProducts.length;
   var roundedDown = Math.floor(random);
   return roundedDown;
-};
+}
 
 ProductVoter.renderProductvoter = function() {
   // make our randomIndex number to feed a position in array Goat.allGoats
@@ -61,17 +61,37 @@ ProductVoter.renderProductvoter = function() {
   ProductVoter.imgElement.numberShown = randomProduct.numberShown;
 }; //end render function
 
-//make new instances, remember that your filepath starts at the HTML document, NOT the js file. This means you don't need ..slash
-// is there a more efficient way to make my 20 new instances?
 
+// trash array of discarded indices
+var oldPics = [];
 
-// then I want to render 3 selected random images with buttons
-function render1() {
-  var picker = 0;
-  var staple = document.getElementById('qualityProduct1');
-  staple.src = allProducts[picker].idName;
+//where in the HTML to put the 1st wormhole
+var staple = document.getElementById('qualityProduct0');
+var picker0 = 0;
+// picture 1 with conditions
+function render0() {
+  var picker0 = 0;
+  picker0 = ranNum();
+  oldPics.push(picker0);
+  console.log('first rando: ' + picker0);
+  // Now we make our loop to temporarily trash used indices
+  while (picker0 === oldPics[0]) {
+    ranNum();
+    picker0 = ranNum();
+    console.log('new rando: ' + picker0);
+  }
+  console.log('shiny new rando: ' + picker0);
+  oldPics[0] = picker0;
+  // populate that used index value into the trash
+  staple.src = allProducts[picker0].idName;
+  // oldPics[0] = picker0;
+  // console.log(oldPics[0]);
 }
-render1();
+render0();
+
+
+
+
 // listen to the image element and add event listener, maybe I need to add three, one for each button?
 // ProductVoter.imgElement.addEventListener('click', ProductVoter.randomProduct);
 //idName, filepath, caption, numberClicked, numberShown
