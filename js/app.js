@@ -1,106 +1,172 @@
 'use strict';
-var allProducts = [];
-var allProductIdNames = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
-console.log(allProductIdNames);
-// I'll connect this to the DOM:
-ProductVoter.imgElement = document.getElementById('qualityProduct');
+// We'll connect the pictures to the DOM:
+// ProductVoter.imgElement = document.getElementById('options');
+ProductVoter.imgElement0 = document.getElementById('qualityProduct0');
+ProductVoter.imgElement1 = document.getElementById('qualityProduct1');
+ProductVoter.imgElement2 = document.getElementById('qualityProduct2');
+
+// add clicking
+// ProductVoter.imgElement0.addEventListener('click', registerVote);
+// ProductVoter.imgElement1.addEventListener('click', registerVote);
+// ProductVoter.imgElement1.addEventListener('click', registerVote);
+
+// function registerVote(){
+//   var currentTarget = event.target.currentSrc.slice(53);
+//   console.log (currentTarget);
+//   voteCount++;
+//   if (voteCount <26) {
+
+//     for (var j = 0 ; j < Product.allProduct.length ; j++) {
+//       if(event.target.alt === Product.allProducts[j].name){
+//         Product.allProduct[j].votes++;
+//         console.log(Product.allProduct[j].votes);
+//       }
+//     };
 
 
-
-function ProductVoter(idName, filepath, numberClicked, numberShown) {
-  this.idName = idName;
-  this.filepath = filepath;
-  // numberClicked and numberShown will need to be vars assigned to functions, or maybe prototypes
-  this.numberClicked = numberClicked;
-  this.numberShown = numberShown;
-  allProducts.push(this);
-  console.log(this);
-} //end constructor
-new ProductVoter('img/bag.jpg', 'bag', 0, 0);
-new ProductVoter('img/banana.jpg','banana', 0, 0);
-// new ProductVoter('img/bathroom.jpg','bathroom', 0, 0);
-// new ProductVoter('img/boots.jpg','boots', 0, 0);
-// new ProductVoter('img/breakfast.jpg','breakfast', 0, 0);
-// new ProductVoter('img/bubblegum.jpg','bubblegum', 0, 0);
-// new ProductVoter('img/chair.jpg','chair', 0, 0);
-// new ProductVoter('img/cthulhu.jpg','cthulhu', 0, 0);
-// new ProductVoter('img/dog-duck.jpg','dog-duck', 0, 0);
-// new ProductVoter('img/dragon.jpg','dragon', 0, 0);
-// new ProductVoter('img/pen.jpg','pen', 0, 0);
-// new ProductVoter('img/pet-sweep.jpg','pet-sweep', 0, 0);
-// new ProductVoter('img/scissors.jpg','scissors', 0, 0);
-// new ProductVoter('img/shark.jpg','shark', 0, 0);
-// new ProductVoter('img/sweep.jpg','sweep', 0, 0);
-// new ProductVoter('img/tauntaun.jpg','tauntaun', 0, 0);
-// new ProductVoter('img/unicorn.jpg','unicorn', 0, 0);
-// new ProductVoter('img/usb.gif','usb', 0, 0);
-// new ProductVoter('img/water-can.jpg','water-can', 0, 0);
-// new ProductVoter('img/wine-glass.jpg','wine-glass', 0, 0);
-
-console.log(allProducts);
-
-//randomly generate a number to use as an index value
-function ranNum() {
-  var random = Math.random() * allProducts.length;
-  var roundedDown = Math.floor(random);
-  return roundedDown;
-}
-
-ProductVoter.renderProductvoter = function() {
-  // make our randomIndex number to feed a position in array Goat.allGoats
-  var randomIndex = ProductVoter.ranNum();
-
-  // now we use that to get our random product:
-  var randomProduct = allProducts[randomIndex];
-  // randomProduct won't be an array, it'll be a new product for each event.
-  //now, modify idname:
-  ProductVoter.imgElement.idName = randomProduct.idName;
-  ProductVoter.imgElement.filepath = randomProduct.filepath;
-  ProductVoter.imgElement.caption = randomProduct.caption;
-  ProductVoter.imgElement.numberClicked = randomProduct.numberClicked;
-  ProductVoter.imgElement.numberShown = randomProduct.numberShown;
-}; //end render function
+    // var dummyChart = document.getElementById('dummyChart').getContext('2d');
 
 
-// trash array of discarded indices
-var oldPics = [];
+    ProductVoter.allProducts = []; // array of product objects
+    ProductVoter.productsDisplayed = []; //this will be an array of index values
+    ProductVoter.randomIndex = []; //this will be 7 used indices
+    ProductVoter.numberClicked = [];
+    ProductVoter.numberShown = [];
 
-//where in the HTML to put the 1st wormhole
-var staple = document.getElementById('qualityProduct0');
-var picker0 = 0;
-// picture 1 with conditions
-function render0() {
-  var picker0 = 0;
-  picker0 = ranNum();
-  oldPics.push(picker0);
-  console.log('first rando: ' + picker0);
-  // Now we make our loop to temporarily trash used indices
-  while (picker0 === oldPics[0]) {
-    ranNum();
-    picker0 = ranNum();
-    console.log('new rando: ' + picker0);
+    // Let's build our friendly constructor:
+    Function ProductVoter(filepath, altText) {
+      this.filepath = filepath;
+      this.altText = altText;
+      this.numberClicked = 0;
+      this.numberShown = 0;
+      ProductVoter.allProducts.push(this);
+    }
+  
+     //end constructor, great job.
+
+  new ProductVoter('img/bag.jpg', 'bag');
+  new ProductVoter('img/banana.jpg','banana');
+  new ProductVoter('img/bathroom.jpg','bathroom');
+  new ProductVoter('img/boots.jpg', 'boots');
+  new ProductVoter('img/breakfast.jpg', 'breakfast');
+  new ProductVoter('img/bubblegum.jpg', 'bubblegum');
+  new ProductVoter('img/chair.jpg','chair');
+  new ProductVoter('img/cthulhu.jpg','cthulhu');
+  new ProductVoter('img/dog-duck.jpg', 'dog-duck');
+  new ProductVoter('img/dragon.jpg', 'dragon');
+  new ProductVoter('img/pen.jpg', 'pen');
+  new ProductVoter('img/pet-sweep.jpg','pet-sweep');
+  new ProductVoter('img/scissors.jpg','scissors');
+  new ProductVoter('img/shark.jpg', 'shark');
+  new ProductVoter('img/sweep.jpg', 'sweep');
+  new ProductVoter('img/tauntaun.jpg', 'tauntaun');
+  new ProductVoter('img/unicorn.jpg','unicorn');
+  new ProductVoter('img/usb.jpg','usb');
+  new ProductVoter('img/water-can.jpg', 'water-can');
+  new ProductVoter('img/wine-glass.jpg', 'wine-glass');
+
+  //randomly generate a number to use as an index value
+  ProductVoter.ranNum = function() {
+    var random = Math.random() * ProductVoter.allProducts.length;
+    var roundedDown = Math.floor(random);
+    return roundedDown;
+  };
+
+  // randomizing images and removing duplicates
+  for (var i = 0; i < 7; i++) {
+    if (!ProductVoter.productsDisplayed.includes(ProductVoter.randomIndex0)) {
+      ProductVoter.productsDisplayed.unshift(ProductVoter.randomIndex);
+    }
+    else {ProductVoter.randomIndex0 = ProductVoter.ranNum();
+    }
   }
-  console.log('shiny new rando: ' + picker0);
-  oldPics[0] = picker0;
-  // populate that used index value into the trash
-  staple.src = allProducts[picker0].idName;
-  // oldPics[0] = picker0;
-  // console.log(oldPics[0]);
-}
-render0();
+
+  for (var j = 0; j < 7; j++) {
+    if (!ProductVoter.productsDisplayed.includes(ProductVoter.randomIndex1)) {
+      ProductVoter.productsDisplayed.unshift(ProductVoter.randomIndex);
+    }
+    else {ProductVoter.randomIndex1 = ProductVoter.ranNum();
+    }
+  }
+  for (var k = 0; k < 7; k++) {
+    if (!ProductVoter.productsDisplayed.includes(ProductVoter.randomIndex2)) {
+      ProductVoter.productsDisplayed.unshift(ProductVoter.randomIndex);
+    }
+    else {ProductVoter.randomIndex2 = ProductVoter.ranNum();
+    }
+  }
+
+
+  // Render images to screen
+  ProductVoter.renderImages = function() {
+
+    var randomIndex0 = ProductVoter.ranNum();
+    var randomProduct0 = ProductVoter.allProducts[randomIndex0];
+
+    ProductVoter.imgElement0.src = randomProduct0.filepath;
+    ProductVoter.imgElement0.alt = randomProduct0.altText;
+
+
+    var randomIndex1 = ProductVoter.ranNum();
+    var randomProduct1 = ProductVoter.allProducts[randomIndex1];
+
+    ProductVoter.imgElement1.src = randomProduct1.filepath;
+    ProductVoter.imgElement1.alt = randomProduct1.altText;
+
+    var randomIndex2 = ProductVoter.ranNum();
+    var randomProduct2 = ProductVoter.allProducts[randomIndex2];
+
+    ProductVoter.imgElement2.src = randomProduct2.filepath;
+    ProductVoter.imgElement2.alt = randomProduct2.altText;
+  };
+  // make them clickable and make that matter
+  // imgElement0.addEventListener('click', registerVote);
+  // ProductVoter.handleClick = function(event) {
+  //   ProductVoter.numberClicked++;
+
+  //   for (var i = 0; i < ProductVoter.allProducts.length; i++) {
+  //     if (event.target.alt === ProductVoter.allProducts[i].altText) {
+  //       ProductVoter.allProducts[i].numberClicked++;
+  //     }
+  //   }
+
+  // }
+ProductVoter.renderImages();
+
+ProductVoter.randomIndex0 = 0;
+ProductVoter.randomIndex1 = 0;
+ProductVoter.randomIndex2 = 0;
 
 
 
 
-// listen to the image element and add event listener, maybe I need to add three, one for each button?
-// ProductVoter.imgElement.addEventListener('click', ProductVoter.randomProduct);
-//idName, filepath, caption, numberClicked, numberShown
+
+// var allProductAltText = [];
+// ProductVoter.allProduct.altText = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
+
+
+// We still have a lot to do, but for now we'll move on and make a chart.
+
+// var dummyChart = getElementById('dummyChart').getContext('2d');
+// new chart(dummyChart).Bar(barData) { // eslint disable
+//   [labels: [1, 2, 3, 4, 5, 7],
+//   datasets: [
+//     fillColor: "rgb(100, 100, 100)",
+//     strokeColor: "black",
+//     data: [10, 20, 30, 40, 50, 60]
+//   ]
+// ]
+// }
 
 
 
+// We'll make some dummy variables for now
 
+// var dummyVariables = [ranNum(), ranNum(), ranNum(), ranNum(), ranNum(), ranNum(), ranNum(), ranNum(), ranNum(), ranNum(), ranNum(), ranNum(), ranNum(), ranNum(), ranNum(), ranNum(), ranNum(), ranNum(), ranNum(), ranNum()];
+// console.log(dummyVariables);
+// that didn't work, so we'll count up from one.
+// var barData = {
 
-
-
-
+// }
+// ;
 
