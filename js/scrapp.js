@@ -1,18 +1,17 @@
 'use strict';
 // var imgElement0 = document.getElementById('qualityProduct0');
-ProductVoter.imgElement = document.getElementById('qualityProduct0');
-ProductVoter.imgElement1 = document.getElementById('qualityProduct1');
+var imgElement0 = document.getElementById('qualityProduct0');
+var imgElement1 = document.getElementById('qualityProduct1');
+var imgElement2 = document.getElementById('qualityProduct2');
+var oldPics = [];
 var allProducts = [];
-// var allProductAlts = [];
-
-// I'll connect this to the DOM:
+var currentPics = [];
 
 
 
-
-function ProductVoter(altText, filepath) {
-  this.altText = altText;
+function ProductVoter(filepath, altText) {
   this.filepath = filepath;
+  this.altText = altText;
   this.numberClicked = 0;
   this.numberShown = 0;
   allProducts.push(this);
@@ -46,47 +45,40 @@ function ranNum() {
   var roundedDown = Math.floor(random);
   return roundedDown;
 }
+function renderImages() {
 
-// ProductVoter.renderProductvoter = function() {
-// make our randomIndex number to feed a position in array Goat.allGoats
-// var randomIndex = ProductVoter.ranNum();
+  currentPics[0] = oldPics[0];
+  currentPics[1] = oldPics[1];
+  currentPics[2] = oldPics[2];
 
-// now we use that to get our random product: I THINK THIS IS WHAT'S POPULATING MY DISPLAYED ARRAY INSTEAD OF THE PREVIOUS INDEX VALUE USED
-// var randomProduct = allProducts[randomIndex];
-// randomProduct won't be an array, it'll be a new product for each event.
-//now, modify idname:
-// ProductVoter.imgElement.altText = randomProduct.altText;
-// ProductVoter.imgElement.filepath = randomProduct.filepath;
-// ProductVoter.imgElement.caption = randomProduct.caption;
-// ProductVoter.imgElement.numberClicked = randomProduct.numberClicked;
-// ProductVoter.imgElement.numberShown = randomProduct.numberShown;
-// }; //end render function
+  console.log(currentPics);
+
+  imgElement0.src = currentPics[0].filepath;
+  imgElement1.src = currentPics[1].filepath;
+  imgElement2.src = currentPics[2].filepath;
+
+}
+
+
+
 
 
 // trash array of discarded indices
-var oldPics = [];
 
-//where in the HTML to put the 1st wormhole
-// var staple = document.getElementById('qualityProduct0');
-// var picker0 = 0;
-// picture 1 with conditions
-// function render0() {
-// var picker0 = 0;
-// picker0 = ranNum();
-// // oldPics.push(picker0);
-// console.log('first rando: ' + picker0);
-// Now we make our loop to temporarily trash used indices
+
+
 function getOldPics () {
   while (oldPics.length < 7) {
     var randomIndex = ranNum();
     console.log('get ranNum ' + randomIndex);
     oldPics.push(allProducts[randomIndex]);
   }
+
 }
 getOldPics();
+renderImages();
 
 // }
-console.log('full oldPics array: ' + oldPics);
 
 // populate that used index value into the trash
 // staple.src = allProducts[picker0].idName;
@@ -113,9 +105,29 @@ console.log('full oldPics array: ' + oldPics);
 
 
 
+// ProductVoter.renderProductvoter = function() {
+// make our randomIndex number to feed a position in array Goat.allGoats
+// var randomIndex = ProductVoter.ranNum();
+
+// now we use that to get our random product: I THINK THIS IS WHAT'S POPULATING MY DISPLAYED ARRAY INSTEAD OF THE PREVIOUS INDEX VALUE USED
+// var randomProduct = allProducts[randomIndex];
+// randomProduct won't be an array, it'll be a new product for each event.
+//now, modify idname:
+// ProductVoter.imgElement.altText = randomProduct.altText;
+// ProductVoter.imgElement.filepath = randomProduct.filepath;
+// ProductVoter.imgElement.caption = randomProduct.caption;
+// ProductVoter.imgElement.numberClicked = randomProduct.numberClicked;
+// ProductVoter.imgElement.numberShown = randomProduct.numberShown;
+// }; //end render function
 
 
-
-
-
-
+//where in the HTML to put the 1st wormhole
+// var staple = document.getElementById('qualityProduct0');
+// var picker0 = 0;
+// picture 1 with conditions
+// function render0() {
+// var picker0 = 0;
+// picker0 = ranNum();
+// // oldPics.push(picker0);
+// console.log('first rando: ' + picker0);
+// Now we make our loop to temporarily trash used indices
