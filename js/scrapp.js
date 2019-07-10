@@ -3,8 +3,9 @@
 var imgElement0 = document.getElementById('qualityProduct0');
 var imgElement1 = document.getElementById('qualityProduct1');
 var imgElement2 = document.getElementById('qualityProduct2');
-var oldPics = [];
+
 var allProducts = [];
+var oldPics = [];
 var currentPics = [];
 
 
@@ -45,6 +46,7 @@ function ranNum() {
   var roundedDown = Math.floor(random);
   return roundedDown;
 }
+
 function renderImages() {
 
   currentPics[0] = oldPics[0];
@@ -78,23 +80,24 @@ function getOldPics () {
 getOldPics();
 renderImages();
 
-// }
+
 
 // populate that used index value into the trash
+
 // staple.src = allProducts[picker0].idName;
 // oldPics[0] = picker0;
 // console.log(oldPics[0]);
 
 // Now for the 2nd image
-// var picker1 = 0;
-// picker1 = ranNum();
-// while (!oldPics.includes(picker1)) {
-//   ranNum();
-//   picker0 = ranNum();
-//   console.log('new rando: ' + picker0);
-// }
-// }
-// render0();
+var picker1 = 0;
+picker1 = ranNum();
+while (!oldPics.includes(picker1)) {
+  ranNum();
+  picker0 = ranNum();
+  console.log('new rando: ' + picker0);
+}
+
+render0();
 
 
 
